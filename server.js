@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const  cors=require("cors");
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
 
@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 
 
 //define a simple route
-
+app.use(cors())
 app.get('/', (req,res) => {
     res.json({"message": "Welcome to Easynote"});
 });
@@ -44,3 +44,5 @@ require('./app/routes/note.routes.js')(app)
 app.listen(3500, ()=> {
     console.log("server is listening on port 3500");
 })
+// Require Notes routes
+require('./app/routes/note.routes')(app);
